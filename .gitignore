@@ -1,0 +1,4 @@
+venv
+/sqlite3/
+/payroll/payroll/__pycache__/
+/payroll/portal/migrations/
