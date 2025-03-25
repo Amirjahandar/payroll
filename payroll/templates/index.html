@@ -3,10 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>portal</title>
-
+    <title>نمایش تصویر</title>
 </head>
 <body>
-    <h1>this is portal page!!!!!!!!</h1>
+    <h2>تصویر از دیتابیس</h2>
+    <img id="myImage" alt="Image from DB" />
+
+    <script>
+        async function loadImage() {
+            const imageId = '00003057';  // آی‌دی تصویر در دیتابیس
+            const response = await fetch(`http://127.0.0.1:8000/portal/${imageId}/`); 
+            
+            console.log(response)
+            if (response.ok) {
+                const blob = await response.blob();  
+                document.getElementById("myImage").src = URL.createObjectURL(blob);
+            } else {
+                console.error("تصویر پیدا نشد");
+            }
+        }
+
+        loadImage();
+    </script>
 </body>
 </html>

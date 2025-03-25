@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>سامانه فیش حقوقی|شرکت تعمیرات نیروگاهی ایران</title>
     <style>
         :root {
             --seafoam: #98f5e1;
@@ -40,6 +40,7 @@
             position: relative;
             overflow: hidden;
             transition: transform 0.3s ease;
+            direction: rtl;
         }
 
         .login-container:hover {
@@ -90,7 +91,7 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            font-size: 2rem;
+            font-size: 1.7rem;
             margin-bottom: 0.5rem;
         }
 
@@ -130,6 +131,7 @@
             font-size: 1rem;
             transition: all 0.3s ease;
             outline: none;
+            direction: rtl;
         }
 
         .form-input:focus {
@@ -255,35 +257,35 @@
         <div class="header">
             <div class="icon-container">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <img src="./logo.jpg" alt="">
                     <circle cx="12" cy="7" r="4"></circle>
                 </svg>
             </div>
-            <h1 class="welcome-text">Welcome Back</h1>
-            <p class="subtitle">Please sign in to continue</p>
+            <h1 class="welcome-text">شرکت تعمیرات نیروگاهی ایران</h1>
+            <p class="subtitle">لطفا برای ادامه وارد حساب کاربری خود شوید</p>
         </div>
 
         <form id="loginForm" novalidate>
             <div class="form-group">
-                <label class="form-label" for="email">Email Address</label>
+                <label class="form-label" for="email">کد پرسنلی</label>
                 <div class="input-group">
                     <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                         <polyline points="22,6 12,13 2,6"></polyline>
                     </svg>
-                    <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
+                    <input type="email" id="email" class="form-input" placeholder="کد پرسنلی خودرا وارد نمایید" required>
                 </div>
-                <div class="error" id="emailError">Please enter a valid email address</div>
+                <div class="error" id="emailError">کد پرسنلی معتبر نیست</div>
             </div>
 
             <div class="form-group">
-                <label class="form-label" for="password">Password</label>
+                <label class="form-label" for="password">رمز عبور</label>
                 <div class="input-group">
                     <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                         <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                     </svg>
-                    <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
+                    <input type="password" id="password" class="form-input" placeholder="رمز عبور خودرا وارد نمایید" required>
                 </div>
                 <div class="error" id="passwordError">Password must be at least 6 characters</div>
             </div>
@@ -291,15 +293,15 @@
             <div class="form-row">
                 <div class="checkbox-group">
                     <input type="checkbox" id="remember" class="checkbox-input">
-                    <label for="remember" class="checkbox-label">Remember me</label>
+                    <label for="remember" class="checkbox-label">من را به خاطر بسپار</label>
                 </div>
-                <a href="#" class="forgot-password">Forgot password?</a>
+                <a href="#" class="forgot-password">رمز را فراموش کرده اید؟</a>
             </div>
 
-            <button type="submit" class="submit-btn">Sign in</button>
+            <button type="submit" class="submit-btn">ورود</button>
 
             <p class="signup-text">
-                Don't have an account? <a href="#" class="signup-link">Sign up</a>
+                حساب کاربری ندارید؟   <a href="#" class="signup-link">ثبت نام</a>
             </p>
         </form>
     </div>

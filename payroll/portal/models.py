@@ -9,7 +9,6 @@ class PayRoll(models.Model):
     IYearMonth = models.IntegerField()
     FishName = models.CharField(max_length= 50)
     FishImage = models.BinaryField()
-
     class Meta:
-        managed = False
+        managed = True
         db_table = 'dbo.payroll'
