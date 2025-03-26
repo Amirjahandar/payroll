@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -232,7 +233,7 @@
         <div class="header">
             <div class="icon-container">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <img src="./logo.jpg" alt="">
+                    <img src="{% static 'images/logo.jpg' %}" alt="">
                     <circle cx="9" cy="7" r="4"></circle>
                     <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
                     <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>

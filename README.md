@@ -13,14 +13,15 @@ The payroll slips are stored in an **SQL Server database** and are retrieved dyn
 
 1. **Clone the repository:**  
    ```bash
-   git clone https://github.com/your-repo/payroll-viewer.git
-   cd payroll-viewer
+   git clone git@github.com:Amirjahandar/payroll.git
+   cd payroll
    ```  
 
 2. **Create a virtual environment and install dependencies:**  
    ```bash
    python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   On Linux: source venv/bin/activate  
+   On Windows: venv\Scripts\activate
    pip install -r requirements.txt
    ```  
 
@@ -29,12 +30,13 @@ The payroll slips are stored in an **SQL Server database** and are retrieved dyn
 
 4. **Run migrations and start the server:**  
    ```bash
+   python manage.py makemigrations
    python manage.py migrate
    python manage.py runserver
    ```  
 
 ## Usage  
-[Describe how users can interact with the system here.]  
+Deploy project on server, signup and login then you can check your payroll 
 
 ## License  
-This project is licensed under the MIT License.  
+This project is licensed under the IPRCO License.  
