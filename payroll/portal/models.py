@@ -22,4 +22,4 @@ class PayRoll(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=11, blank=False, null=False)
-    company_position = models.CharField(max_length=100, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
