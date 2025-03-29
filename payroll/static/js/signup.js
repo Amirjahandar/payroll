@@ -93,8 +93,11 @@ document.getElementById('signupForm').addEventListener('submit', function(e) {
         setTimeout(() => {
             btn.textContent = originalText;
             btn.disabled = false;
-            alert('حساب کاربری شما با موفقیت ایجاد شد!');
-            window.location.href = 'index.html';
+            this.submit()
+            if(msg){
+                alert(msg);
+            }else{
+            alert('حساب کاربری شما با موفقیت ایجاد شد!');}
         }, 1500);
     }
 });

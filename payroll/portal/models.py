@@ -21,5 +21,8 @@ class PayRoll(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone_number = models.CharField(max_length=11, blank=False, null=False)
+    phone_number = models.CharField(max_length=11, blank=False, null=False, unique=True)
     description = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.user.username}_{self.user.first_name}_{self.user.last_name}"

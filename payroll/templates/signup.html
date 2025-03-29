@@ -24,7 +24,8 @@
             <p class="subtitle">لطفا اطلاعات خود را با دقت وارد کنید</p>
         </div>
 
-        <form id="signupForm" novalidate>
+        <form id="signupForm" novalidate  action="{% url 'signup' %}" method='POST'>
+            {% csrf_token %}
             <div class="form-row">
                 <div class="form-group">
                     <label class="form-label" for="firstName">نام</label>
@@ -33,7 +34,7 @@
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
-                        <input type="text" id="firstName" class="form-input" placeholder="نام" required>
+                        <input type="text" id="firstName" class="form-input" placeholder="نام" required name="first_name">
                     </div>
                     <div class="error" id="firstNameError">درج نام اجباری است!</div>
                 </div>
@@ -45,7 +46,7 @@
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
-                        <input type="text" id="lastName" class="form-input" placeholder="نام خانوادگی" required>
+                        <input type="text" id="lastName" class="form-input" placeholder="نام خانوادگی" required  name="last_name">
                     </div>
                     <div class="error" id="lastNameError">درج نام خانوادگی اجباری است</div>
                 </div>
@@ -58,7 +59,7 @@
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
-                    <input type="text" id="username" class="form-input" placeholder="کد پرسنلی خود را وارد نمایید" required maxlength="8" pattern="[0-9]{1,8}">
+                    <input type="text" id="username" class="form-input" placeholder="کد پرسنلی خود را وارد نمایید" required maxlength="8" pattern="[0-9]{1,8}"  name="username">
                 </div>
                 <div class="error" id="usernameError">کد پرسنلی اشتباه است</div>
             </div>
@@ -69,7 +70,7 @@
                     <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                     </svg>
-                    <input type="tel" id="phone" class="form-input" placeholder="09123456789" required pattern="0[0-9]{10}" maxlength="11">
+                    <input type="tel" id="phone" class="form-input" placeholder="09123456789" required pattern="0[0-9]{10}" maxlength="11"  name="phone_number">
                 </div>
                 <div class="error" id="phoneError">لطفا شماره تماس 11 رقمی خود را با پیش شماره 0 وارد نمایید</div>
             </div>
@@ -81,7 +82,7 @@
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                         <polyline points="22,6 12,13 2,6"></polyline>
                     </svg>
-                    <input type="email" id="email" class="form-input" placeholder="example@gmail.com">
+                    <input type="email" id="email" class="form-input" placeholder="example@gmail.com"  name="email">
                 </div>
                 <div class="error" id="emailError">ایمیل معتبر نیست</div>
             </div>
@@ -94,7 +95,7 @@
                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                             <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                         </svg>
-                        <input type="password" id="password" class="form-input" placeholder="(Aed#74@58, e.g)" required>
+                        <input type="password" id="password" class="form-input" placeholder="(Aed#74@58, e.g)" required  name="password1">
                     </div>
                     <div class="error" id="passwordError">رمز عبور باید حداقل هشت کاراکتر و شامل عدد ,علامت ,حروف بزرگ و کوچک باشد</div>
                 </div>
@@ -106,7 +107,7 @@
                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                             <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                         </svg>
-                        <input type="password" id="confirmPassword" class="form-input" placeholder="تایید رمز عبور" required>
+                        <input type="password" id="confirmPassword" class="form-input" placeholder="تایید رمز عبور" required name="password2" >
                     </div>
                     <div class="error" id="confirmPasswordError">رمز عبور و تکرار رمز یکسان نیست</div>
                 </div>
@@ -119,6 +120,10 @@
             </p>
         </form>
     </div>
+
+    <script>
+        var msg = "{{ msg | escapejs}}";
+    </script>
 
     <script src="{% static 'js/signup.js' %}"></script>
 
