@@ -1,0 +1,235 @@
+@font-face {
+    font-family: 'Vazir';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Vazir', system-ui, sans-serif;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header Styles */
+.header {
+    position: relative;
+    height: 400px;
+    color: white;
+    background-image: url('https://images.unsplash.com/photo-1603077492137-20c1e9a27e81?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+.header-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.header-content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.calendar-icon {
+    width: 64px;
+    height: 64px;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.header p {
+    font-size: 1.25rem;
+}
+
+/* Date Selection Styles */
+.date-selection {
+    background-color: white;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.selection-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.select-input {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    font-family: 'Vazir', system-ui, sans-serif;
+    font-size: 1rem;
+}
+
+.submit-button {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.75rem 1.5rem;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-family: 'Vazir', system-ui, sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.submit-button:hover {
+    background-color: #1d4ed8;
+}
+
+/* Main Content Styles */
+.main-content {
+    flex-grow: 1;
+    padding: 2rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.result-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.result-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.selected-date {
+    color: #4b5563;
+    font-size: 1.125rem;
+}
+
+/* Image Section Styles */
+.image-section {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-top: 2rem;
+}
+
+.image-controls {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.control-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    color: #1f2937;
+    font-family: 'Vazir', system-ui, sans-serif;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.control-button:hover {
+    background-color: #f1f5f9;
+    border-color: #cbd5e1;
+}
+
+.control-button svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.image-container {
+    padding: 1rem;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.375rem;
+    display: block;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    .selection-container {
+        flex-direction: row;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .select-input, .submit-button {
+        width: auto;
+    }
+
+    .header h1 {
+        font-size: 3rem;
+    }
+
+    .image-controls {
+        padding: 1rem 2rem;
+    }
+
+    .image-container {
+        padding: 2rem;
+    }
+}
+
+@media print {
+    .header,
+    .date-selection,
+    .image-controls {
+        display: none;
+    }
+
+    .image-container {
+        padding: 0;
+    }
+
+    .image-container img {
+        max-width: 100%;
+        height: auto;
+    }
+}

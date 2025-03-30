@@ -26,4 +26,5 @@ urlpatterns = [
     path('signup/', signup, name='signup'),
     path('login/', login, name='login'),
     path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
+    path('payroll/<int:year>/<int:month>/', payroll, name="payroll"),
 ]

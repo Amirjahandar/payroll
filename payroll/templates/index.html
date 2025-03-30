@@ -1,24 +1,79 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>تقویم شمسی</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
 </head>
 <body>
-    <h1>salam khosh omadii baby !!!!!</h1>
+    <div class="container">
+        <!-- Header with background image -->
+        <header class="header">
+            <div class="header-overlay"></div>
+            <div class="header-content">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="calendar-icon">
+                    <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect>
+                    <line x1="16" x2="16" y1="2" y2="6"></line>
+                    <line x1="8" x2="8" y1="2" y2="6"></line>
+                    <line x1="3" x2="21" y1="10" y2="10"></line>
+                </svg>
+                <!-- {% if firsname and lastname %} -->
+                <h1><p>خوش آمدید! {{ firstname }} {{ lastname }} {{ debug }}</p></h1>
+                <!-- {% endif %} -->
+                <p>برای دریافت فیش حقوقی تاریخ را انتخاب نمایید</p>
+            </div>
+        </header>
 
+        <!-- Date Selection Bar -->
+        <div class="date-selection">
+            <div class="selection-container">
+                <select id="yearSelect" class="select-input"></select>
+                <select id="monthSelect" class="select-input"></select>
+                <button id="submitBtn" class="submit-button">تأیید</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="result-card">
+                <h2>تاریخ انتخاب شده</h2>
+                <p id="selectedDate" class="selected-date"></p>
+            </div>
+
+            <!-- Image Display Section -->
+            <div id="imageSection" class="image-section" style="display: none;">
+                <div class="image-controls">
+                    <button onclick="downloadImage()" class="control-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        دانلود تصویر
+                    </button>
+                    <button onclick="printImage()" class="control-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                            <rect x="6" y="14" width="12" height="8"></rect>
+                        </svg>
+                        چاپ تصویر
+                    </button>
+                </div>
+                <div class="image-container">
+                    <img src="" id="displayImage" style="display: none;" alt="fish-image">
+                </div>
+            </div>
+        </main>
+    </div>
     <form action="{% url 'logout' %}" method="post">
         {% csrf_token %}
         <button type="submit" class="btn btn-danger">خروج</button>
     </form>
 
-    {% if image_base64 %}
-    <img src="data:image/png;base64,{{ image_base64 }}" alt="فیش حقوقی">
-    {% else %}
-    <p>تصویری برای نمایش وجود ندارد.</p>
-    {% endif %}
 
-
+    <script src="{% static 'js/index.js' %}"></script>
 </body>
 </html>

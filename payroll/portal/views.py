@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as dj_login
 from django.contrib.auth.decorators import login_required
-from django.http.response import HttpResponse
+from django.http import JsonResponse, HttpResponse
 from PIL import Image
 import io
 import base64
@@ -49,36 +49,42 @@ def signup(request):
 
 
 
+
 @login_required(login_url='/login')
 def index(request):
-    return render(request, 'index.html')
+    firstname = request.user.first_name
+    lastname = request.user.last_name
+    context = {'firstname':str(firstname), 'lastname':str(lastname)}
+    print(context)
+    return render(request, 'index.html', context)
+
+
+
 
 
 @login_required(login_url='/login')
-def payroll(request):
-    user = request.user
-    year = 1403
-    month = 10
-    pers_code = user.username.zfill(8)
+def payroll(request, year, month):
+    user = request.user.username
+    pers_code = user.zfill(8)
     print(pers_code, year, month)
 
     try:
         fish_portal = PayRoll.objects.get(perscode=pers_code, issueyear=year, issuemonth=month)
         image_data = fish_portal.fishimage
 
-        # تبدیل داده‌های باینری به تصویر
+        # convert data to image 
         image = Image.open(io.BytesIO(image_data))
         image = image.convert("RGB")
         buffered = io.BytesIO()
-        # ارسال تصویر به فرانت‌ند
+        # send image to front 
         image.save(buffered, "PNG")
         image_base64 = base64.b64encode(buffered.getvalue()).decode()
-        return render(request, 'index.html', {'image_base64':image_base64})
+        return  JsonResponse({'image_base64':image_base64})
 
     except PayRoll.DoesNotExist:
         return HttpResponse("Record not found", status=404)
     except Exception as e:
-        return HttpResponse(f"Error: {str(e)}", status=500)
+        return JsonResponse({"error": str(e)}, status=500)
 
 
 
