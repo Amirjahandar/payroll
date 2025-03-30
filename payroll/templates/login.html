@@ -25,6 +25,7 @@
 
         <form id="loginForm" novalidate  action="{% url 'login' %}" method='POST'>
             {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
             <div class="form-group">
                 <label class="form-label" for="username">کد پرسنلی</label>
                 <div class="input-group">
