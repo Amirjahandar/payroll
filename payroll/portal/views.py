@@ -1,14 +1,16 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import authenticate, login as dj_login
+from django.contrib.auth import authenticate, login as dj_login, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse
 from PIL import Image
 import io
 import base64
-from .forms import UserRegisterForm, ProfileForm
+from .forms import *
 from .models import PayRoll
+from .utils import send_verification_code
 
+User = get_user_model()
 
 def login(request):
     if request.method == 'POST':
@@ -89,3 +91,45 @@ def payroll(request, year, month):
 
 
 
+
+
+def request_password_reset(request):
+    if request.method == "POST":
+        form = PasswordResetRequestForm(request.POST)
+        if form.is_valid():
+            personnel_code = form.cleaned_data["personnel_code"]
+            try:
+                user = User.objects.get(username=personnel_code)  # فرض بر این که یوزرنیم همان کد پرسنلی است
+                phone_number = user.profile.phone_number  # شماره موبایل ثبت شده در پروفایل
+
+                verification_code = send_verification_code(phone_number)
+                request.session["reset_personnel_code"] = personnel_code
+                request.session["reset_code"] = verification_code
+                return JsonResponse({"success": True, "message": "کد تأیید ارسال شد."})
+            except User.DoesNotExist:
+                return JsonResponse({"success": False, "error": "کد پرسنلی یافت نشد!"})
+
+    return render(request, "password_reset_request.html", {"form": PasswordResetRequestForm()})
+
+
+
+
+def confirm_password_reset(request):
+    if request.method == "POST":
+        form = PasswordResetConfirmForm(request.POST)
+        if form.is_valid():
+            verification_code = form.cleaned_data["verification_code"]
+            new_password = form.cleaned_data["new_password"]
+
+            if request.session.get("reset_code") == int(verification_code):
+                personnel_code = request.session.get("reset_personnel_code")
+                user = User.objects.get(username=personnel_code)
+                user.set_password(new_password)  # تغییر رمز با روش استاندارد
+                user.save()
+                del request.session["reset_personnel_code"]
+                del request.session["reset_code"]
+                return redirect("login")  # اینجا نام URL لاگین را بگذار
+            else:
+                return JsonResponse({"success": False, "error": "کد تأیید اشتباه است!"})
+
+    return render(request, "password_reset_confirm.html", {"form": PasswordResetConfirmForm()})
